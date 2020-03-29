@@ -9,6 +9,8 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import './App.css'
 
+const _ = require('lodash');
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
@@ -29,6 +31,22 @@ const App = () => {
   const passwordChanged = (event) => {
     console.log(event.target.value)
     setPassword(event.target.value)
+  }
+
+  const increaseLikes = async (blogTobemod) => {
+
+    console.log(blogTobemod)
+
+    const updatedBlog= await blogService.update(blogTobemod)
+
+    console.log(updatedBlog)
+
+    var updatedlist = _.remove(blogs, function(blog) {
+      return blog.id !== updatedBlog.id;
+    });
+    
+    setBlogs(updatedlist.concat(updatedBlog))
+
   }
 
   const endSession = (event) => {
@@ -85,7 +103,8 @@ const App = () => {
   const fetchBlogList = async  () => {
 
     const bloglist= await blogService.getAll()
-    setBlogs( bloglist )
+
+    setBlogs(_.orderBy(bloglist, ['likes'], [ 'desc'])  )
   }
 
   useEffect(() => {
@@ -116,7 +135,7 @@ if(account) {
       />
 </ChangeVisibility>
 
-      <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession}/>
+      <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession} increaseLikes={increaseLikes}/>
       
     </>
   )
