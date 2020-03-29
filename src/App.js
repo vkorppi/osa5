@@ -62,25 +62,31 @@ const App = () => {
   }
 
   const newBlogSubmited = async  (event) => {
+    
+    // Lomake komponenttiin
     event.preventDefault()
+    // Lomake komponenttiin
+
     try {
 		
 		
-	 formref.current.visibilityHandler()
+	    formref.current.visibilityHandler()
 	
       var newblog = await blogService.createNew({"title":title,"author":author,"url":url},account)
       messageref.current.messageHandler(`Blog creation successfull`)
+
+      // Viittauksen kautta
       setBlogs(blogs.concat(newblog))
 
+      // Lomake komponenttiin
       setTitle('')
       setAuthor('')
       setUrl('')
+      // Lomake komponenttiin
               
     }
     catch (exception) {
 		
-		console.log(exception)
-
     messageref.current.messageHandler(`Blog creation failed`)
               
 
@@ -102,11 +108,16 @@ const App = () => {
     setUrl(event.target.value)
   }
 
+  const fetchBlogList = async  () => {
+
+    const bloglist= await blogService.getAll()
+    setBlogs( bloglist )
+  }
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+
+    fetchBlogList()
+
   }, [])
 
   useEffect(() => {   
