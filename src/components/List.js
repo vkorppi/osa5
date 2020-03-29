@@ -12,7 +12,9 @@ const Allblogs   = ({content,loggeduser,logoutHandler}) => {
       <div> <button onClick={logoutHandler}>logout</button></div>
       <br></br>
       {content.map(blog =>
+
         <Blog key={blog.id} blog={blog} />
+        
       )}
     </div>
   )

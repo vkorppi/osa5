@@ -15,9 +15,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [loginUrl, setloginUrl] = useState('')
   const [account, setAccount] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+
   
   
   const formref = React.createRef()
@@ -46,10 +44,11 @@ const App = () => {
         username, password,
       })
 
-      messageref.current.messageHandler(`User ${loggedUser.name} was authenticated successfully`)
-              
+      messageref.current.messageHandler(`User ${loggedUser.name} was authenticated successfully`)        
       window.localStorage.setItem('UserWithSession', JSON.stringify(loggedUser)      ) 
+
       setAccount(loggedUser)
+
       setUsername('')
       setPassword('')
     }
@@ -61,52 +60,27 @@ const App = () => {
     }
   }
 
-  const newBlogSubmited = async  (event) => {
-    
-    // Lomake komponenttiin
-    event.preventDefault()
-    // Lomake komponenttiin
+  const newBlogSubmited = async  (newBlog) => {
 
     try {
-		
-		
+				
 	    formref.current.visibilityHandler()
 	
-      var newblog = await blogService.createNew({"title":title,"author":author,"url":url},account)
+      var newblog = await blogService.createNew(newBlog,account)
       messageref.current.messageHandler(`Blog creation successfull`)
 
-      // Viittauksen kautta
       setBlogs(blogs.concat(newblog))
 
-      // Lomake komponenttiin
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-      // Lomake komponenttiin
-              
     }
     catch (exception) {
 		
-    messageref.current.messageHandler(`Blog creation failed`)
+      messageref.current.messageHandler(`Blog creation failed`)
               
 
     }
   }
 
-  const titleChanged = async  (event) => {
-    console.log(event.target.value)
-    setTitle(event.target.value)
-  }
 
-  const authorChanged = async  (event) => {
-    console.log(event.target.value)
-    setAuthor(event.target.value)
-  }
-
-  const urlChanged = async  (event) => {
-    console.log(event.target.value)
-    setUrl(event.target.value)
-  }
 
   const fetchBlogList = async  () => {
 
@@ -138,13 +112,7 @@ if(account) {
     
 <ChangeVisibility ref={formref}>
     <NewBlogForm 
-        title={title}
-        author={author}
-        url={url}
-        newBlogHandler={newBlogSubmited}
-        titleHandler={titleChanged}
-        authorHandler={authorChanged}
-        urlHandler={urlChanged}
+        createNewBlog={newBlogSubmited}
       />
 </ChangeVisibility>
 
