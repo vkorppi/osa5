@@ -36,6 +36,11 @@ const Blog = ({ blog, increaseLikes}) => {
   <div>
     {blog.user.name} 
   </div>
+  <div>
+  <button>TestButton</button>
+  </div>
+
+ 
   </ChangeVisibility>
 
   </div>

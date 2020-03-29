@@ -13,8 +13,10 @@ const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes}) => {
       <br></br>
       {content.map(blog =>
 
+        <>
         <Blog key={blog.id} blog={blog} increaseLikes={increaseLikes}/>
         
+        </>
       )}
     </div>
   )

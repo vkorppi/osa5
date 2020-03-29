@@ -15,7 +15,6 @@ const update = async (updatedblog) => {
   
   const updateurl = baseUrl+'/'+updatedblog.id
 
-  console.log(updateurl)
 
   return (await axios.put(updateurl, updatedblog)).data
 }

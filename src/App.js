@@ -45,8 +45,8 @@ const App = () => {
       return blog.id !== updatedBlog.id;
     });
     
-    setBlogs(updatedlist.concat(updatedBlog))
-
+    setBlogs(_.orderBy(updatedlist.concat(updatedBlog), ['likes'], [ 'desc']))
+    
   }
 
   const endSession = (event) => {
@@ -64,6 +64,8 @@ const App = () => {
 
       messageref.current.messageHandler(`User ${loggedUser.name} was authenticated successfully`)        
       window.localStorage.setItem('UserWithSession', JSON.stringify(loggedUser)      ) 
+
+      console.log(loggedUser)
 
       setAccount(loggedUser)
 
@@ -87,8 +89,8 @@ const App = () => {
       var newblog = await blogService.createNew(newBlog,account)
       messageref.current.messageHandler(`Blog creation successfull`)
 
-      setBlogs(blogs.concat(newblog))
-
+      setBlogs(_.orderBy(blogs.concat(newblog), ['likes'], [ 'desc']))
+      
     }
     catch (exception) {
 		
