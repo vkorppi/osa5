@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { useState, useImperativeHandle  } from 'react'
 
-const Message = ({ text }) => {
+const Message = React.forwardRef((props, ref)  => {
+
+  const [notification, setNotification] = useState('')
+
+
+  const messageHandler = (text) => {
+    
+    setNotification(text)
+
+    setTimeout(() => {
+      setNotification('')
+    }, 2000)
+
+  }
+
+  useImperativeHandle(ref, () => {
+
+		return { messageHandler  }  
+		  
+	})
 	
-    if (text === '') {
+    if (notification === '') {
       return ''
     }
   
     return (
       <p className="message">
-        {text}
+        {notification}
       </p>
     )
     
     
-  }
+  })
 
   export default Message;

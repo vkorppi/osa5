@@ -18,9 +18,10 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
-  const [notification, setNotification] = useState('')
+  
   
   const formref = React.createRef()
+  const messageref = React.createRef()
 
   const usernameChanged = (event) => {
     console.log(event.target.value)
@@ -45,16 +46,8 @@ const App = () => {
         username, password,
       })
 
-
-
-      setNotification(`User ${loggedUser.name} was authenticated successfully`)
+      messageref.current.messageHandler(`User ${loggedUser.name} was authenticated successfully`)
               
-      setTimeout(() => {
-        setNotification('')
-      }, 2000)
-
-      
-
       window.localStorage.setItem('UserWithSession', JSON.stringify(loggedUser)      ) 
       setAccount(loggedUser)
       setUsername('')
@@ -63,13 +56,8 @@ const App = () => {
     catch (exception) {
       
 
-      setNotification(`Login failed`)
+      messageref.current.messageHandler(`Login failed`)
               
-      setTimeout(() => {
-        setNotification('')
-      }, 2000)
-
-
     }
   }
 
@@ -81,26 +69,20 @@ const App = () => {
 	 formref.current.visibilityHandler()
 	
       var newblog = await blogService.createNew({"title":title,"author":author,"url":url},account)
+      messageref.current.messageHandler(`Blog creation successfull`)
       setBlogs(blogs.concat(newblog))
 
-      setNotification(`Blog creation successfull`)
+      setTitle('')
+      setAuthor('')
+      setUrl('')
               
-      setTimeout(() => {
-        setNotification('')
-      }, 2000)
-
-		
-
     }
     catch (exception) {
 		
 		console.log(exception)
 
-      setNotification(`Blog creation failed`)
+    messageref.current.messageHandler(`Blog creation failed`)
               
-      setTimeout(() => {
-        setNotification('')
-      }, 2000)
 
     }
   }
@@ -141,7 +123,7 @@ if(account) {
 	 
     <>
 
-    <Message text={notification}/>
+    <Message ref={messageref}/>
     
 <ChangeVisibility ref={formref}>
     <NewBlogForm 
@@ -163,7 +145,7 @@ if(account) {
 
   return (
 <>
-    <Message text={notification}/>
+    <Message ref={messageref}/>
 
 <LoginForm 
         username={username}
