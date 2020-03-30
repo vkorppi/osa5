@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ChangeVisibility from './ChangeVisibility'
 
 const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
 
 
-  const likesHandler = async  (event) => {
+  const likesHandler = async  () => {
 
    
     const updatedblog = {
@@ -16,11 +17,11 @@ const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
       "id": blog.id
     }
 
-  await increaseLikes(updatedblog)
+    await increaseLikes(updatedblog)
 
   }
 
-  const removeHandler = async (event) => {
+  const removeHandler = async () => {
 
     if(window.confirm('Are you sure you want to remove this blog')) {
       await removeBlog(blog.id)
@@ -28,32 +29,41 @@ const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
   }
 
   return (
-  <div>
+    <div>
 
-  <div>
-    {blog.title} {blog.author}
-  </div>
+      <div>
+        {blog.title} {blog.author}
+      </div>
 
-  <ChangeVisibility ref={React.createRef()}>
-  <div>
-    {blog.url} 
-  </div>
-  <div>
-    {blog.likes} <button onClick={likesHandler}>Like</button>
-  </div>
-  <div>
-    {blog.user.name} 
-  </div>
-  <div>
-  <button style={{display:  account.username === blog.user.username ? '' : 'none' }} onClick={removeHandler} >Remove</button>
-  </div>
+      <ChangeVisibility ref={React.createRef()}>
+        <div>
+          {blog.url} 
+        </div>
+        <div>
+          {blog.likes} <button onClick={likesHandler}>Like</button>
+        </div>
+        <div>
+          {blog.user.name} 
+        </div>
+        <div>
+          <button style={{display:  account.username === blog.user.username ? '' : 'none' }} onClick={removeHandler} >Remove</button>
+        </div>
 
   
  
-  </ChangeVisibility>
+      </ChangeVisibility>
 
-  </div>
-)
-  }
+    </div>
+  )
+}
+
+Blog.propTypes = {
+  
+  increaseLikes: PropTypes.func.isRequired,
+  account: PropTypes.object.isRequired,
+  blog: PropTypes.object.isRequired,
+  removeBlog: PropTypes.func.isRequired,
+
+}
 
 export default Blog

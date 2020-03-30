@@ -17,21 +17,22 @@ const Message = React.forwardRef((props, ref)  => {
 
   useImperativeHandle(ref, () => {
 
-		return { messageHandler  }  
-		  
-	})
-	
-    if (notification === '') {
-      return ''
-    }
-  
-    return (
-      <p className="message">
-        {notification}
-      </p>
-    )
-    
-    
+    return { messageHandler  }  
   })
+	
+  if (notification === '') {
+    return ''
+  }
+  
+  return (
+    <p className="message">
+      {notification}
+    </p>
+  )
+    
+    
+})
 
-  export default Message;
+Message.displayName='Message'
+
+export default Message;

@@ -9,13 +9,13 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import './App.css'
 
+// eslint-disable-next-line no-undef
 const _ = require('lodash');
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loginUrl, setloginUrl] = useState('')
   const [account, setAccount] = useState(null)
 
   
@@ -60,7 +60,7 @@ const App = () => {
     setBlogs(_.orderBy(updatedlist), ['likes'], [ 'desc'])
   }
 
-  const endSession = (event) => {
+  const endSession = () => {
     window.localStorage.removeItem('UserWithSession')
     setAccount(null)
   }
@@ -95,7 +95,7 @@ const App = () => {
 
     try {
 				
-	    formref.current.visibilityHandler()
+      formref.current.visibilityHandler()
 	
       var newblog = await blogService.createNew(newBlog,account)
       messageref.current.messageHandler(`Blog creation successfull`)
@@ -127,39 +127,38 @@ const App = () => {
   }, [])
 
   useEffect(() => {   
-     const accountJson = window.localStorage.getItem('UserWithSession')  
-     accountJson ?  setAccount(JSON.parse(accountJson)) : console.log('No previous session found')
-    } 
-   ,
-    [])
+    const accountJson = window.localStorage.getItem('UserWithSession')  
+    accountJson ?  setAccount(JSON.parse(accountJson)) : console.log('No previous session found')
+  } 
+  ,
+  [])
 
-if(account) {
-  return (
+  if(account) {
+    return (
 
    
-	 
-    <>
+      <>
 
-    <Message ref={messageref}/>
+        <Message ref={messageref}/>
     
-<ChangeVisibility ref={formref}>
-    <NewBlogForm 
-        createNewBlog={newBlogSubmited}
-      />
-</ChangeVisibility>
+        <ChangeVisibility ref={formref}>
+          <NewBlogForm 
+            createNewBlog={newBlogSubmited}
+          />
+        </ChangeVisibility>
 
-      <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession} increaseLikes={increaseLikes} account={account} 
-      removeBlog={removeBlog}/>
+        <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession} increaseLikes={increaseLikes} account={account} 
+          removeBlog={removeBlog}/>
       
-    </>
-  )
-}
+      </>
+    )
+  }
 
   return (
-<>
-    <Message ref={messageref}/>
+    <>
+      <Message ref={messageref}/>
 
-<LoginForm 
+      <LoginForm 
         username={username}
         password={password}
         submitHandler={sendCredentials}
@@ -167,8 +166,8 @@ if(account) {
         passwordHandler={passwordChanged}
       />
 
-</>
-    )
+    </>
+  )
 
 
 }

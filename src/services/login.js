@@ -3,7 +3,7 @@ const loginurl = '/api/login'
 
 const sendUserCreds = async  usernamePassword => {
 
-    return (await axios.post(loginurl, usernamePassword)).data
-  }
+  return (await axios.post(loginurl, usernamePassword)).data
+}
   
-  export default { sendUserCreds }
+export default { sendUserCreds }

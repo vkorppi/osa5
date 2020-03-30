@@ -1,6 +1,7 @@
 
 import React from 'react'
 import Blog from './Blog'
+import PropTypes from 'prop-types'
 
 const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes,account,removeBlog}) => {
 
@@ -14,7 +15,7 @@ const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes,account,remo
       {content.map(blog =>
 
         <>
-        <Blog key={blog.id} blog={blog} increaseLikes={increaseLikes} account={account} removeBlog={removeBlog}/>
+          <Blog key={blog.id} blog={blog} increaseLikes={increaseLikes} account={account} removeBlog={removeBlog}/>
         
         </>
       )}
@@ -22,4 +23,17 @@ const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes,account,remo
   )
 }
 
-  export default Allblogs;
+Allblogs.propTypes = {
+
+  removeBlog: PropTypes.func.isRequired,
+  increaseLikes: PropTypes.func.isRequired,
+  logoutHandler: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
+  account: PropTypes.object.isRequired,
+  loggeduser: PropTypes.object.isRequired
+
+
+}
+
+
+export default Allblogs;
