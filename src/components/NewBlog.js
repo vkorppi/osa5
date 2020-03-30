@@ -40,18 +40,18 @@ const NewBlogForm   = ({createNewBlog}) => {
       <form  onSubmit={newBlogHandler}>
                 
         <div>
-                    title
-          <input type="text" value={title}  onChange={titleHandler} />
+                    
+          <input type="text" id="title" value={title}  onChange={titleHandler} />
         </div>
 
         <div>
-                    author
-          <input  type="text" value={author} onChange={authorHandler} />
+                    
+          <input  type="text" id="author" value={author} onChange={authorHandler} />
         </div>
 
         <div>
-                    url
-          <input  type="text" value={url} onChange={urlHandler} />
+                    
+          <input  type="text" id="url" value={url} onChange={urlHandler} />
         </div>
 
         <div>
@@ -63,6 +63,7 @@ const NewBlogForm   = ({createNewBlog}) => {
   )
 }
 
+/*
 NewBlogForm.propTypes = {
   titleHandler: PropTypes.func.isRequired,
   authorHandler: PropTypes.func.isRequired,
@@ -73,6 +74,7 @@ NewBlogForm.propTypes = {
   author: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 }
+*/
 
 
 

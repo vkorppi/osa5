@@ -26,8 +26,7 @@ const ChangeVisibility = React.forwardRef((props, ref)  => {
   
   return (
     <div>
-      <div style={{display: visible }}>
-        // eslint-disable-next-line react/prop-types
+      <div style={{display: visible }} className="visibility">
         {props.children}       
       </div>
       <button onClick={visibilityHandler}>{buttonText}</button>
