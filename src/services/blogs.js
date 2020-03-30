@@ -11,14 +11,15 @@ const createNew = async (newblog,account) => {
 }
 
 const update = async (updatedblog) => {
-
-  
   const updateurl = baseUrl+'/'+updatedblog.id
-
-
   return (await axios.put(updateurl, updatedblog)).data
 }
 
-export default { getAll,createNew,update }
+const remove = async (id,account) => {
+  const deleteurl = baseUrl+'/'+id
+  return await axios.delete(deleteurl,{ "headers": { "Authorization": `bearer ${account.userToken}`}  })
+}
+
+export default { getAll,createNew,update,remove}
 
 

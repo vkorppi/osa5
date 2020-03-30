@@ -49,6 +49,17 @@ const App = () => {
     
   }
 
+  const removeBlog = (id) => {
+
+    blogService.remove(id,account)
+
+    var updatedlist = _.remove(blogs, function(blog) {
+      return blog.id !== id;      
+    });
+
+    setBlogs(_.orderBy(updatedlist), ['likes'], [ 'desc'])
+  }
+
   const endSession = (event) => {
     window.localStorage.removeItem('UserWithSession')
     setAccount(null)
@@ -137,7 +148,8 @@ if(account) {
       />
 </ChangeVisibility>
 
-      <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession} increaseLikes={increaseLikes}/>
+      <Allblogs content={blogs} loggeduser={account} logoutHandler={endSession} increaseLikes={increaseLikes} account={account} 
+      removeBlog={removeBlog}/>
       
     </>
   )

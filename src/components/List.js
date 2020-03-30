@@ -2,7 +2,7 @@
 import React from 'react'
 import Blog from './Blog'
 
-const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes}) => {
+const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes,account,removeBlog}) => {
 
 
   return (
@@ -14,7 +14,7 @@ const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes}) => {
       {content.map(blog =>
 
         <>
-        <Blog key={blog.id} blog={blog} increaseLikes={increaseLikes}/>
+        <Blog key={blog.id} blog={blog} increaseLikes={increaseLikes} account={account} removeBlog={removeBlog}/>
         
         </>
       )}

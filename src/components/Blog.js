@@ -1,7 +1,8 @@
 import React from 'react'
 import ChangeVisibility from './ChangeVisibility'
 
-const Blog = ({ blog, increaseLikes}) => {
+const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
+
 
   const likesHandler = async  (event) => {
 
@@ -15,8 +16,15 @@ const Blog = ({ blog, increaseLikes}) => {
       "id": blog.id
     }
 
-    await increaseLikes(updatedblog)
+  await increaseLikes(updatedblog)
 
+  }
+
+  const removeHandler = async (event) => {
+
+    if(window.confirm('Are you sure you want to remove this blog')) {
+      await removeBlog(blog.id)
+    }
   }
 
   return (
@@ -37,9 +45,10 @@ const Blog = ({ blog, increaseLikes}) => {
     {blog.user.name} 
   </div>
   <div>
-  <button>TestButton</button>
+  <button style={{display:  account.username === blog.user.username ? '' : 'none' }} onClick={removeHandler} >Remove</button>
   </div>
 
+  
  
   </ChangeVisibility>
 
