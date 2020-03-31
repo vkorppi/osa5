@@ -29,7 +29,7 @@ const ChangeVisibility = React.forwardRef((props, ref)  => {
       <div style={{display: visible }} className="visibility">
         {props.children}       
       </div>
-      <button onClick={visibilityHandler}>{buttonText}</button>
+      <button className="showhide" onClick={visibilityHandler}>{buttonText}</button>
     </div>
   )
 })

@@ -63,7 +63,7 @@ const NewBlogForm   = ({createNewBlog}) => {
   )
 }
 
-/*
+
 NewBlogForm.propTypes = {
   titleHandler: PropTypes.func.isRequired,
   authorHandler: PropTypes.func.isRequired,
@@ -74,7 +74,7 @@ NewBlogForm.propTypes = {
   author: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 }
-*/
+
 
 
 

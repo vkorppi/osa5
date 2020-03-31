@@ -7,7 +7,7 @@ const Allblogs   = ({content,loggeduser,logoutHandler,increaseLikes,account,remo
 
 
   return (
-    <div>
+    <div id="list">
       <h2>blogs</h2>
       <div>User name: {loggeduser.name}</div>
       <div> <button onClick={logoutHandler}>logout</button></div>

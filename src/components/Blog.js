@@ -29,7 +29,7 @@ const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
   }
 
   return (
-    <div>
+    <div className="blogs">
 
       <div>
         {blog.title} {blog.author}
@@ -40,13 +40,13 @@ const Blog = ({ blog, increaseLikes,account,removeBlog}) => {
           {blog.url} 
         </div>
         <div>
-          {blog.likes} <button onClick={likesHandler}>Like</button>
+          <span className="numberoflikes"> {blog.likes}</span> <button className="likebuttons" onClick={likesHandler}>Like</button>
         </div>
         <div>
           {blog.user.name} 
         </div>
         <div>
-          <button style={{display:  account.username === blog.user.username ? '' : 'none' }} onClick={removeHandler} >Remove</button>
+          <button className="removeblogs" style={{display:  account.username === blog.user.username ? '' : 'none' }} onClick={removeHandler} >Remove</button>
         </div>
 
   

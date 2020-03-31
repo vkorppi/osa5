@@ -2,6 +2,7 @@ module.exports = {
   "env": {
       "browser": true,
       "es6": true,
+	  "cypress/globals": true
   },
   "extends": [ 
       "eslint:recommended",
@@ -19,5 +20,7 @@ module.exports = {
           "error",
           2  
       ]
-  }
+  },
+  "plugins": [
+        "react", "jest", "cypress"    ]
 }
